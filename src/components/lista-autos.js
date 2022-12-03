@@ -10,7 +10,7 @@ export class ListaAutos extends LitElement {
     }
 
     constructor(){
-        super();
+        super();version
         console.log("ListaAutos");
     }
 
