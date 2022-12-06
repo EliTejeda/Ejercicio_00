@@ -1,13 +1,22 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from "lit";
 
 export class CarVersion extends LitElement {
-    static styles = [
-        css`
-            :host {
-                display: block;
-            }
-        `
-    ];
+  static get properties() {
+    return {
+      versionValue: { value: String },//variable que guarda el valor a lanzar
+    };
+  }
+
+  constructor() {
+    super();
+    this.versionValue = "";
+  }
+
+  
+  firstUpdated() {
+    this.changeVersion();
+  }
+
 
     render() {
         return html`
@@ -18,5 +27,24 @@ export class CarVersion extends LitElement {
         
         `;
     }
+    get inputVersion() {
+        /*return this.renderRoot?.querySelector("#mversion") ?? null;*/
+        return this.shadowRoot.getElementById("#version") ?? null;
+      }
+    
+      changeVersion () {
+        this.versionValue = this.inputVersion;
+        /*console.log("gatillo funciona");*/
+    
+        this.dispatchEvent(
+          new CustomEvent("changeVersion", {
+            detail: {
+              value: this.versionValue,
+            },
+            bubbles: true,
+            composed: true,
+          })
+        );
+      }
 }
 customElements.define('car-version', CarVersion);

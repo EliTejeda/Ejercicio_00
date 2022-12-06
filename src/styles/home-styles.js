@@ -21,8 +21,9 @@ export default css`
 
       form {
         display: flex;
+        
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: space-evenly;
 
         width: 100%;
         max-width: 1000px;

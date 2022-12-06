@@ -10,8 +10,8 @@ export class ListaAutos extends LitElement {
     }
 
     constructor(){
-        super();version
-        console.log("ListaAutos");
+        super();/*version*/
+        console.log("ListaAutos"); //aparce en consola de volada como flash
     }
 
 
@@ -26,6 +26,6 @@ export class ListaAutos extends LitElement {
         `;
     }
 
- }
+}
 
 customElements.define('lista-autos', ListaAutos);

@@ -3,26 +3,28 @@ import { LitElement, html, css } from "lit";
 import style from "./src/styles/home-styles";
 
 import "./src/components/lista-autos";
-import "./src/components/car-name";
+import "./src/components/car-nombre";
 import "./src/components/car-year";
-import "./src/components/car-brand";
+import "./src/components/car-marca";
 import "./src/components/car-version";
 
 export class HomeVista extends LitElement {
-  
-
   //static properties *JTCL
   static get propeties() {
     return {
       catalog: { type: Object },
-    }
+      inputNombre: { type: String },
+      inputYear: { type: String },
+      inputMarca: { type: String },
+      inputVersion: { type: String },
+    };
   }
-  
-//retorna estilos de home-styles
+
+  //retorna estilos de home-styles
   static get styles() {
-    return[style]
+    return [style];
   }
-  
+
   constructor() {
     super();
     this.catalog = [];
@@ -30,27 +32,30 @@ export class HomeVista extends LitElement {
 
   update() {
     super.update();
-    this.addEventListener('changeName',(event) =>{
-      console.log(event,"update,nombre");
-      console.log(event.detail.value);
+    this.addEventListener("changeNombre", (event) => {
+      this.inputNombre = event.detail.value;
+      /*console.log(event, "update,nombre");
+      console.log(event.detail.value);*/
     });
 
-    this.addEventListener('changeYear',(event) =>{
-      console.log(event,"update,select");
-      console.log(event.detail.value);
-    }); 
+    this.addEventListener("changeYear", (event) => {
+      this.inputYear = event.detail.value;
+      /*console.log(event, "update, year");
+      console.log(event.detail.value);*/
+    });
 
-    this.addEventListener('changeBrand',(event) =>{
-      console.log(event,"update,select");
-      console.log(event.detail.value);
-    }); 
+    this.addEventListener("changeMarca", (event) => {
+      this.inputMarca = event.detail.value;
+      /*console.log(event, "update,marca");
+      console.log(event.detail.value);*/
+    });
 
-    this.addEventListener('changeVersion',(event) =>{
-      console.log(event,"update,select");
-      console.log(event.detail.value);
+    this.addEventListener("changeVersion", (event) => {
+      this.inputVersion = event.detail.value;
+      /*console.log(event, "update,version");
+      console.log(event.detail.value);*/
     });
   }
-    
 
   render() {
     return html`
@@ -58,22 +63,10 @@ export class HomeVista extends LitElement {
         <section>
           <h1>autobazar</h1>
           <form>
-            <div class="field">
-              <label>Nombre</label>
-              <input type="text" id="nombre" required />
-            </div> 
-            <div class="field">
-              <label>Año</label>
-              <input type="number" id="year" required />
-            </div>
-            <div class="field">
-              <label>Marca</label>
-              <input type="text" id="marca" required />
-            </div>
-            <div class="field">
-              <label>Version</label>
-              <input type="text" id="version" required />
-            </div>
+            <car-nombre></car-nombre>
+            <car-year></car-year>
+            <car-marca></car-marca>
+            <car-version></car-version>
             <div class="submit">
               <button @click=${this.addOption}>Agregar</button>
             </div>
@@ -93,22 +86,22 @@ export class HomeVista extends LitElement {
     `;
   }
   //JTCL
-//componente hijo car-name
+  //componente hijo car-name
   /*get inputNombre() {
     return this.renderRoot?.querySelector("#nombre") ?? null;
   }*/
 
-  get inputYear() {
+  /*get inputYear() {
     return this.renderRoot?.querySelector("#year") ?? null;
-  }
-  get inputMarca() {
+  }*/
+  /*get inputMarca() {
     return this.renderRoot?.querySelector("#marca") ?? null;
-  }
+  }*/
 
-  get inputVersion() {
+  /*get inputVersion() {
     return this.renderRoot?.querySelector("#version") ?? null;
-  }
-//componente hijo car-name
+  }*/
+  //componente hijo car-name
   /*changeName() {
     this.thingValue = this.inputNombre.value;
 
@@ -125,13 +118,13 @@ export class HomeVista extends LitElement {
   //JTCL
 
   addOption(e) {
-    console.log("click addOption");
+    console.log("click addOption"); //aparce en consola en flash
 
     this.catalog.push({
-      nombre: this.inputNombre.value,
-      marca: this.inputMarca.value,
-      year: this.inputYear.value,
-      version: this.inputVersion.value,
+      nombre: this.inputNombre,
+      marca: this.inputMarca,
+      year: this.inputYear,
+      version: this.inputVersion,
     });
     this.requestUpdate();
   }
