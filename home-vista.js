@@ -9,6 +9,8 @@ import "./src/components/car-marca";
 import "./src/components/car-version";
 
 export class HomeVista extends LitElement {
+
+   
   //static properties *JTCL
   static get propeties() {
     return {
@@ -17,6 +19,7 @@ export class HomeVista extends LitElement {
       inputYear: { type: String },
       inputMarca: { type: String },
       inputVersion: { type: String },
+      obj: { type: Object},
     };
   }
 
@@ -24,11 +27,22 @@ export class HomeVista extends LitElement {
   static get styles() {
     return [style];
   }
-
+//
   constructor() {
     super();
     this.catalog = [];
-  }
+    this.obj = {
+      log: ['example','test'],
+      log2: ['dos'],
+      get latest() {
+        if (this.log.length === 0) return undefined;
+        return this.log[this.log.length - 1];
+      }
+    };
+    console.log(this.obj.latest);
+
+
+  } 
 
   update() {
     super.update();
@@ -62,7 +76,7 @@ export class HomeVista extends LitElement {
       <main>
         <section>
           <h1>autobazar</h1>
-          <form>
+          
             <car-nombre></car-nombre>
             <car-year></car-year>
             <car-marca></car-marca>
@@ -70,9 +84,9 @@ export class HomeVista extends LitElement {
             <div class="submit">
               <button @click=${this.addOption}>Agregar</button>
             </div>
-          </form>
+          
         </section>
-
+        ${console.log (this.catalog,"render")}
         ${this.catalog.map(
           (element) =>
             html` <lista-autos
@@ -120,14 +134,34 @@ export class HomeVista extends LitElement {
   addOption(e) {
     console.log("click addOption"); //aparce en consola en flash
 
-    this.catalog.push({
+   this.catalog.push({
       nombre: this.inputNombre,
       marca: this.inputMarca,
       year: this.inputYear,
       version: this.inputVersion,
     });
-    this.requestUpdate();
+    
+   this.requestUpdate();
   }
 }
 
 customElements.define("home-vista", HomeVista);
+//EJEMPLO OBJ
+/*const obj = {
+  log: ['example','test'],
+  get latest() {
+    if (this.log.length === 0) return undefined;
+    return this.log[this.log.length - 1];
+  }
+}*/
+
+/*/ejemplo 
+catalogo = [
+    { 
+        indice: valor,
+        indice: valor,
+        indice: valor,
+    }
+    ...
+]*/
+

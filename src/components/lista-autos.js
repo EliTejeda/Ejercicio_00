@@ -1,10 +1,12 @@
 import { LitElement, html } from 'lit';
 
 export class ListaAutos extends LitElement {
+
+    
     //Properties and Atributes
     static properties = {
         nombre: {type: String, hasChanged: function(){console.log("cambio de propiedad")}},
-        year: {type: Number},
+        year: {type: String},
         marca: {type: String},
         version: {type: String},
     }
