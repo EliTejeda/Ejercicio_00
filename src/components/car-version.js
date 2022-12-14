@@ -22,24 +22,26 @@ export class CarVersion extends LitElement {
         return html`
         <div class="field">
               <label>Version</label>
-              <input type="text" id="version" required />
+              <input type="text" id="version" @keyup= "${this.inputVersion}" required />
             </div>
         
         `;
     }
-    get inputVersion() {
-        /*return this.renderRoot?.querySelector("#mversion") ?? null;*/
-        return this.shadowRoot.getElementById("#version") ?? null;
+    inputVersion() {
+      console.log(this.shadowRoot.getElementById("version").value)
+        //return this.renderRoot?.querySelector("#mversion") ?? null;
+        //return this.shadowRoot.getElementById("#version") ?? null;
+        this.changeVersion(this.shadowRoot.getElementById("version").value)
       }
     
-      changeVersion () {
+      changeVersion (data) {
         this.versionValue = this.inputVersion;
-        /*console.log("gatillo funciona");*/
+        //console.log("gatillo funciona");
     
         this.dispatchEvent(
           new CustomEvent("changeVersion", {
             detail: {
-              value: this.versionValue,
+              data
             },
             bubbles: true,
             composed: true,

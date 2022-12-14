@@ -1,4 +1,5 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html,css } from 'lit';
+
 
 export class ListaAutos extends LitElement {
 
@@ -14,12 +15,13 @@ export class ListaAutos extends LitElement {
     constructor(){
         super();/*version*/
         console.log("ListaAutos"); //aparce en consola de volada como flash
+        
     }
 
 
     render() {
         return html`
-            <div style= "border: 1px solid black">
+            <div class= "card" style= "border: 1px solid black">
                 <p>${this.nombre}</p>
                 <p>${this.year}</p>
                 <p>${this.marca}</p>

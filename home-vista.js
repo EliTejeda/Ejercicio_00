@@ -47,25 +47,27 @@ export class HomeVista extends LitElement {
   update() {
     super.update();
     this.addEventListener("changeNombre", (event) => {
-      this.inputNombre = event.detail.value;
+      this.inputNombre = event.detail.data;
+      console.log(this.inputNombre)
       /*console.log(event, "update,nombre");
       console.log(event.detail.value);*/
     });
 
     this.addEventListener("changeYear", (event) => {
-      this.inputYear = event.detail.value;
+      this.inputYear = event.detail.data;
       /*console.log(event, "update, year");
       console.log(event.detail.value);*/
     });
 
     this.addEventListener("changeMarca", (event) => {
-      this.inputMarca = event.detail.value;
+      this.inputMarca = event.detail.data;
+      console.log(this.inputMarca)
       /*console.log(event, "update,marca");
       console.log(event.detail.value);*/
     });
 
     this.addEventListener("changeVersion", (event) => {
-      this.inputVersion = event.detail.value;
+      this.inputVersion = event.detail.data;
       /*console.log(event, "update,version");
       console.log(event.detail.value);*/
     });
@@ -99,7 +101,51 @@ export class HomeVista extends LitElement {
       </main>
     `;
   }
+ 
+
   //JTCL
+
+  addOption(e) {
+    console.log("click addOption"); 
+
+   this.catalog.push({
+      nombre: this.inputNombre,
+      marca: this.inputMarca,
+      year: this.inputYear,
+      version: this.inputVersion,
+    });
+    
+   this.requestUpdate();
+  }
+}
+
+customElements.define("home-vista", HomeVista);
+
+
+
+
+
+
+//EJEMPLO OBJ
+/*const obj = {
+  log: ['example','test'],
+  get latest() {
+    if (this.log.length === 0) return undefined;
+    return this.log[this.log.length - 1];
+  }
+}*/
+
+/*/ejemplo 
+catalogo = [
+    { 
+        indice: valor,
+        indice: valor,
+        indice: valor,
+    }
+    ...
+]*/
+
+ //JTCL
   //componente hijo car-name
   /*get inputNombre() {
     return this.renderRoot?.querySelector("#nombre") ?? null;
@@ -128,40 +174,3 @@ export class HomeVista extends LitElement {
     }))
 
   }*/
-
-  //JTCL
-
-  addOption(e) {
-    console.log("click addOption"); //aparce en consola en flash
-
-   this.catalog.push({
-      nombre: this.inputNombre,
-      marca: this.inputMarca,
-      year: this.inputYear,
-      version: this.inputVersion,
-    });
-    
-   this.requestUpdate();
-  }
-}
-
-customElements.define("home-vista", HomeVista);
-//EJEMPLO OBJ
-/*const obj = {
-  log: ['example','test'],
-  get latest() {
-    if (this.log.length === 0) return undefined;
-    return this.log[this.log.length - 1];
-  }
-}*/
-
-/*/ejemplo 
-catalogo = [
-    { 
-        indice: valor,
-        indice: valor,
-        indice: valor,
-    }
-    ...
-]*/
-

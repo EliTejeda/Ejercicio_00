@@ -99,4 +99,10 @@ export default css`
         border-radius: 5px;
     }
 
+    //cards
+    .card{
+      width: 20%;
+      
+    }
+
 `;

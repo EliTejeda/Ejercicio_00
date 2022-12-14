@@ -21,24 +21,25 @@ export class CarMarca extends LitElement {
         return html`
         <div class="field">
               <label>Marca</label>
-              <input type="text" id="marca" required />
-            </div>
+              <input type="text" id="marca" @keyup= "${this.inputMarca}" required />
+        </div>
         
         `;
     }
-    get inputMarca() {
-        /*return this.renderRoot?.querySelector("#marca") ?? null;*/
-        return this.shadowRoot.getElementById("#marca") ?? null;
+    inputMarca() {
+      console.log(this.shadowRoot.getElementById("marca").value)
+        //return this.renderRoot?.querySelector("#marca") ?? null;
+        this.changeMarca(this.shadowRoot.getElementById("marca").value)
       }
     
-      changeMarca () {
+      changeMarca (data) {
         this.marcaValue = this.inputMarca;
-        /*console.log("gatillo funciona");*/
+        //console.log("gatillo funciona");
     
         this.dispatchEvent(
           new CustomEvent("changeMarca", {
             detail: {
-              value: this.marcaValue,
+              data
             },
             bubbles: true,
             composed: true,

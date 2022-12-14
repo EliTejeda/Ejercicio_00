@@ -19,30 +19,26 @@ export class CarNombre extends LitElement {
     return html`
       <div class="field">
         <label>Nombre</label>
-        <input
-          type="text"
-          id="name"
-          required
-          value=""
-          @change=${this.changeName}
-        />
+        <input type="text" id="nombre" @keyup= "${this.inputNombre}" required/>
       </div>
     `;
   }
 
-  get inputNombre() {
+  inputNombre() {
+    console.log(this.shadowRoot.getElementById("nombre").value)
     /*return this.renderRoot?.querySelector("#name") ?? null;*/
-    return this.shadowRoot.getElementById("#name") ?? null;
+    /*return this.shadowRoot.getElementById("#name") ?? null;*/
+    this.changeNombre(this.shadowRoot.getElementById("nombre").value)
   }
 
-  changeNombre() {
+  changeNombre(data) {
     this.nombreValue = this.inputNombre;
     /*console.log("gatillo funciona");*/
 
     this.dispatchEvent(
       new CustomEvent("changeNombre", {
         detail: {
-          value: this.nombreValue,
+          data
         },
         bubbles: true,
         composed: true,
