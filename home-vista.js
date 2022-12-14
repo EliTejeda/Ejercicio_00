@@ -1,6 +1,6 @@
 //componente padre
 import { LitElement, html, css } from "lit";
-import style from "./src/styles/home-styles";
+
 
 import "./src/components/lista-autos";
 import "./src/components/car-nombre";
@@ -24,13 +24,42 @@ export class HomeVista extends LitElement {
   }
 
   //retorna estilos de home-styles
-  static get styles() {
-    return [style];
-  }
+  static styles = [
+
+      css`
+  
+        :host {
+  
+          display: flex
+  
+        }
+  
+        .container2 {
+  
+          width:70vw;
+  
+        }
+        .container {
+      border: solid 3px fuchsia;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      grid-gap: 2em;
+      margin-top: 2em;
+      justify-items: center;
+      width: 80vw;
+    };
+  
+      `,
+  
+    ];
+    
+  
 //
   constructor() {
     super();
     this.catalog = [];
+    this.list = [];
     this.obj = {
       log: ['example','test'],
       log2: ['dos'],
@@ -78,17 +107,22 @@ export class HomeVista extends LitElement {
       <main>
         <section>
           <h1>autobazar</h1>
-          
-            <car-nombre></car-nombre>
+           <car-nombre></car-nombre>
             <car-year></car-year>
             <car-marca></car-marca>
             <car-version></car-version>
             <div class="submit">
               <button @click=${this.addOption}>Agregar</button>
             </div>
-          
+          <select>
+            ${this.list.map( (element) =>
+            html`
+            <option>${element}</option>
+            `)}
+          </select>
         </section>
         ${console.log (this.catalog,"render")}
+        <div class= "container">
         ${this.catalog.map(
           (element) =>
             html` <lista-autos
@@ -97,7 +131,9 @@ export class HomeVista extends LitElement {
               marca=${element.marca}
               version=${element.version}
             ></lista-autos>`
+
         )}
+        </div>
       </main>
     `;
   }
@@ -114,6 +150,8 @@ export class HomeVista extends LitElement {
       year: this.inputYear,
       version: this.inputVersion,
     });
+    
+    this.list.push(this.inputMarca)
     
    this.requestUpdate();
   }

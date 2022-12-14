@@ -100,9 +100,7 @@ export default css`
     }
 
     //cards
-    .card{
-      width: 20%;
-      
-    }
+    
+    
 
 `;

@@ -1,35 +1,49 @@
-import { LitElement, html,css } from 'lit';
-
+import { LitElement, html, css } from "lit";
 
 export class ListaAutos extends LitElement {
+  static styles = [
+    css`
+      :host {
+        display: flex;
+      }
 
-    
-    //Properties and Atributes
-    static properties = {
-        nombre: {type: String, hasChanged: function(){console.log("cambio de propiedad")}},
-        year: {type: String},
-        marca: {type: String},
-        version: {type: String},
-    }
+      .card {
+        width: 20vw;
+      }
+     
+    `,
+  ];
 
-    constructor(){
-        super();/*version*/
-        console.log("ListaAutos"); //aparce en consola de volada como flash
-        
-    }
+  //Properties and Atributes
+  static properties = {
+    nombre: {
+      type: String,
+      hasChanged: function () {
+        console.log("cambio de propiedad");
+      },
+    },
+    year: { type: String },
+    marca: { type: String },
+    version: { type: String },
+  };
 
+  constructor() {
+    super(); /*version*/
+    console.log("ListaAutos"); //aparce en consola de volada como flash
+  }
 
-    render() {
-        return html`
-            <div class= "card" style= "border: 1px solid black">
-                <p>${this.nombre}</p>
-                <p>${this.year}</p>
-                <p>${this.marca}</p>
-                <p>${this.version}</p>
-            </div>
-        `;
-    }
-
+  render() {
+    return html`
+      
+        <div class="card" style="border: 1px solid black">
+          <p>${this.nombre}</p>
+          <p>${this.year}</p>
+          <p>${this.marca}</p>
+          <p>${this.version}</p>
+        </div>
+      
+    `;
+  }
 }
 
-customElements.define('lista-autos', ListaAutos);
+customElements.define("lista-autos", ListaAutos);
